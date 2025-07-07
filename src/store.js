@@ -23,7 +23,25 @@ export default function storeReducer(store, action = {}) {
         ...store,
         characters: action.payload
       };
-      break;  
+    break;
+    case 'setPlanets':
+      return {
+        ...store,
+        planets: action.payload
+      };
+    break;
+    case 'setVehicles':
+      return {
+        ...store,
+        vehicles: action.payload
+      };
+    break;
+    case 'setFavorites':
+      return {
+        ...store,
+        favorites: action.payload
+      };
+    break;  
     default:
       throw Error('Unknown action.');
   }    
