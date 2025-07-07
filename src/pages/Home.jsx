@@ -8,20 +8,20 @@ export const Home = () => {
 
 	const apiUrl = "https://www.swapi.tech/api/"
 	const { store, dispatch } = useGlobalReducer()
-	const [characters, setCharacters] = useState([]);
+	const [people, setPeople] = useState([]);
 	const [planets, setPlanets] = useState([]);
 	const [vehicles, setVehicles] = useState([]);
 	
-	async function fetchCharacters() {
+	async function fetchPeople() {
 		try {
 			await fetch(apiUrl + "people")
 			.then((response) => response.json())
 			.then((data) => {
-				setCharacters(data.results);
-				dispatch({ type: "setCharacters", payload: data.results });
+				setPeople(data.results);
+				dispatch({ type: "setPeople", payload: data.results });
 				//console.log(data);
 			})
-			.catch((error) => console.error("Error fetching characters:", error));
+			.catch((error) => console.error("Error fetching people:", error));
 		} catch (error) {
 			console.error("Error in fetchData:", error);
 		}
@@ -60,8 +60,8 @@ export const Home = () => {
 
 	useEffect(() => {
 		
-		fetchCharacters();
-		fetchPlanets()
+		fetchPeople();
+		fetchPlanets();
 		fetchVehicles();
 
 	}, []);
@@ -69,9 +69,9 @@ export const Home = () => {
 
 	return (
 		<>
-			<CardGallery cards={characters} title={"Characters"}></CardGallery>
-			<CardGallery cards={planets} title={"Planets"}></CardGallery>
-			<CardGallery cards={vehicles} title={"Vehicles"}></CardGallery>
+			<CardGallery cards={people} title={"Characters"} destination={'people'}></CardGallery>
+			<CardGallery cards={planets} title={"Planets"} destination={'planets'}></CardGallery>
+			<CardGallery cards={vehicles} title={"Vehicles"} destination={'vehicles'}></CardGallery>
 		</>
 	);
 }; 

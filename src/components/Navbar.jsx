@@ -1,7 +1,21 @@
 import { Link } from "react-router-dom";
 import starWarsImageUrl from "../assets/img/star-wars.webp";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+
 
 export const Navbar = () => {
+
+	const { store, dispatch } = useGlobalReducer()
+
+	function deleteFromFavorites(name) {
+		console.log("Deleting from favorites:", name);
+		let favorites = store.favorites || [];
+		favorites = favorites.filter(fav => fav.name !== name);
+		dispatch({
+			type: "setFavorites",
+			payload: favorites
+		});
+	}
 
 	return (
 		<nav className="navbar navbar-light bg-light">
@@ -13,13 +27,28 @@ export const Navbar = () => {
 				</Link>
 				<div className="dropdown">
 					<a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Favorites
+						Favorites <span className="badge badge-light">{store.favorites?.length || 0}</span>
 					</a>
 
+				
 					<ul className="dropdown-menu">
-						<li><a className="dropdown-item" href="#">Action</a></li>
-						<li><a className="dropdown-item" href="#">Another action</a></li>
-						<li><a className="dropdown-item" href="#">Something else here</a></li>
+						{
+							store.favorites?.length > 0 ? (
+								store.favorites.map((favorite, index) => (
+									<li key={index}>
+										<Link className="dropdown-item" to={favorite.url}>
+											{favorite.name}
+										</Link>
+										<button>
+											<i className="fa fa-trash" aria-hidden="true" onClick={() => deleteFromFavorites(favorite.name)}></i>
+										</button>
+									</li>
+								))
+							) : (
+								<li><span className="dropdown-item">No favorites yet</span></li>
+							)
+						}
+						
 					</ul>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 import { DetailsCard } from "./DetailsCard"
 
-export const CardGallery = ({title, cards}) => {
+export const CardGallery = ({title, cards, destination}) => {
     //console.log("DetailsCard rendered with name:", name, "and details:", details);
     
     return (
@@ -28,6 +28,7 @@ export const CardGallery = ({title, cards}) => {
 												`Hair Color: ${card.hair_color}`,
 												`Skin Color: ${card.skin_color}`,
 											]}
+											destination={destination}
 										/>
 									)
 								})
