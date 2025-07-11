@@ -13,21 +13,28 @@ export const CardGallery = ({title, cards, destination}) => {
 					<div className="col-12">
 						<div className="d-flex gap-3 flex-nowrap overflow-x-scroll">
 							{
-								cards.map((card, index) => {
+								cards.map(({properties, uid} = card, index) => {
 									//console.log(card);
+									const propertiesKeys = Object.keys(properties);
+									const cleanPropertiesKeys = propertiesKeys.map((key) => {
+										return key.replace(/_/g, " ").replace(/([a-z])([A-Z])/g, '$1 $2');
+									});
+
+
+
+									let details = [];
+									for (let index = 2; index < 6; index++) {
+										details.push(cleanPropertiesKeys[index] + ": " + properties[propertiesKeys[index]]);	
+									}
+										
 									
 									return (
 										<DetailsCard
-											id={card.uid}
+											id={uid}
 											key={index}
-											name={card.name}
+											name={properties.name}
 											text={"Some quick example text to build on the card title and make up the bulk of the card's content."}
-											details={[
-												`Height: ${card.height}`,
-												`Mass: ${card.mass}`,
-												`Hair Color: ${card.hair_color}`,
-												`Skin Color: ${card.skin_color}`,
-											]}
+											details={details}
 											destination={destination}
 										/>
 									)

@@ -14,12 +14,12 @@ export const Home = () => {
 	
 	async function fetchPeople() {
 		try {
-			await fetch(apiUrl + "people")
+			await fetch(apiUrl + "people" + "?expanded=true")
 			.then((response) => response.json())
 			.then((data) => {
 				setPeople(data.results);
 				dispatch({ type: "setPeople", payload: data.results });
-				//console.log(data);
+				console.log(data);
 			})
 			.catch((error) => console.error("Error fetching people:", error));
 		} catch (error) {
@@ -29,12 +29,12 @@ export const Home = () => {
 
 	async function fetchPlanets() {
 		try {
-			await fetch(apiUrl + "planets")
+			await fetch(apiUrl + "planets" + "?expanded=true")
 			.then((response) => response.json())
 			.then((data) => {
 				setPlanets(data.results);
 				dispatch({ type: "setPlanets", payload: data.results });
-				//console.log(data);
+				console.log(data);
 			})
 			.catch((error) => console.error("Error fetching planets:", error));
 		} catch (error) {
@@ -44,12 +44,12 @@ export const Home = () => {
 
 	async function fetchVehicles() {
 		try {
-			await fetch(apiUrl + "vehicles")
+			await fetch(apiUrl + "vehicles" + "?expanded=true")
 			.then((response) => response.json())
 			.then((data) => {
 				setVehicles(data.results);
 				dispatch({ type: "setVehicles", payload: data.results });
-				//console.log(data);
+				console.log(data);
 			})
 			.catch((error) => console.error("Error fetching vehicles:", error));
 		} catch (error) {

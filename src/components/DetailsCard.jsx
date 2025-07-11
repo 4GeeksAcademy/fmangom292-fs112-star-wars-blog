@@ -13,7 +13,7 @@ export const DetailsCard = ({id, name, text, details, destination}) => {
         const isFavorite = favorites.some(fav => fav.name === name);
         if (isFavorite) {
             console.log("Item is already in favorites:", name);
-            return; // Exit if already a favorite
+            return; 
         }
 
         favorites.push({
@@ -37,7 +37,7 @@ export const DetailsCard = ({id, name, text, details, destination}) => {
                     <p className="text-start">{text}</p>
                     <ul className="list-group list-group-flush " style={{"textDecoration": "none"}}>
                         {details.map((detail, index) => (
-                            <li key={index} className="list-group-item text-start">{detail}</li>
+                            <li key={index} className=" text-capitalize list-group-item text-start">{detail}</li>
                         ))}
                     </ul>
                     <div className="d-flex justify-content-between align-items-center mt-3">
